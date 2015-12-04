@@ -244,7 +244,7 @@ namespace MSPForm
                         string add_sil = (temp + " " + silabas[0]).Trim();
                         if (add_sil.Length + 1 > col)
                         {
-                            ret.Add(temp);
+                            ret.Add(temp.Trim());
                             temp = "";
                             continue;
                         }
@@ -271,7 +271,7 @@ namespace MSPForm
                 }
                 siguiente = Pop(ref words);
             }
-            ret.Add(temp);
+            ret.Add(temp.Trim());
             return ret;
         }
     }
