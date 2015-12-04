@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace MSPForm
 {
     class Justify
     {
-
         private readonly char[] vocal={ 'a','e','i','o','u','á','é','í','ó','ú', 'ü'};
         private readonly char[] tilde = {'í','ú' };
         private readonly char[] fuerte = { 'a', 'e', 'o' };
@@ -38,7 +36,7 @@ namespace MSPForm
             rgx = new Regex(pattern);
             return rgx.Replace(s, "u");
         }
-        // Separa una palabra en sílabas
+        // Separa una palabra en sílabas, Distingue cualquier caso en español (diptongos, triptongos, hiatos)
         private List <string> separa(string word)
         {
             string buffer = "";
@@ -196,8 +194,9 @@ namespace MSPForm
             return word;
         }
         // Justifica un texto
-        public void justifica(string text, int col)
+        public List<string> justifica(string text, int col)
         {
+            List<string> ret = new List<string>();
             text = text.Trim();
             text = text.Replace("\n", " ");
             // Lista de palabras
@@ -218,7 +217,7 @@ namespace MSPForm
                 }
                 else if (append.Length == col)
                 {
-                    Console.WriteLine(append);
+                    ret.Add(append);
                     temp = "";
                 }
                 // No cabe la siguiente palabra
@@ -227,13 +226,13 @@ namespace MSPForm
                 {
                     if (siguiente.Length < col)
                     {
-                        Console.WriteLine(temp.Trim());
+                        ret.Add(temp.Trim());
                         temp = siguiente;
                     }
                     else if (siguiente.Length == col)
                     {
-                        Console.WriteLine(temp.Trim(), siguiente);
-                        Console.WriteLine(siguiente);
+                        ret.Add(temp.Trim());
+                        ret.Add(siguiente);
                         temp = "";
                     }
                     // Separa sílabas. Se ha decidido que el guión cuente como carácter
@@ -243,7 +242,7 @@ namespace MSPForm
                         string add_sil = (temp + " " + silabas[0]).Trim();
                         if (add_sil.Length+1 > col)
                         {
-                            Console.WriteLine(temp);
+                            ret.Add(temp);
                             temp = "";
                             continue;
                         }
@@ -256,7 +255,7 @@ namespace MSPForm
                                 suma += silabas[i].Length;
                                 if (suma + temp.Length+1 > col)
                                 {
-                                    Console.WriteLine(temp+"-");
+                                    ret.Add(temp+"-");
                                     siguiente = siguiente.Substring(suma+silabas[0].Length - silabas[i].Length);
                                     break;
                                 }
@@ -270,27 +269,8 @@ namespace MSPForm
                 }
                 siguiente = Pop(ref words);
             }
-            Console.WriteLine(temp);
-        }
-        static void Main(string[] args)
-        {
-            Justify m = new Justify();
-            //Console.WriteLine("Texto:");
-            //string texto = Console.ReadLine();
-            string texto = "Sonsoles necesito un texto muy largo para depurar. Hola que tal Antonio, murciélago, murciélago, murciélago";
-            Console.WriteLine("Columna:");
-            int col;
-            int.TryParse(Console.ReadLine(), out col);
-            Console.WriteLine();
-            while (col == 0)
-            {
-                Console.WriteLine("No se permite una longitud de línea nula");
-                Console.WriteLine("Columna:");
-                int.TryParse(Console.ReadLine(), out col);
-                Console.WriteLine();
-            }
-            m.justifica(texto, col);
-            Console.Read();
+            ret.Add(temp);
+            return ret;
         }
     }
 }
