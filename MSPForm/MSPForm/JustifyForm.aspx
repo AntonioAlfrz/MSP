@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head runat="server">
         <title></title>
         <style>
@@ -66,8 +66,18 @@
             footer {
                 font-variant:small-caps;
             }
+            .inputtext {
+                outline:none;
+                padding:3px;
+                border:0;
+                background-color: #cccccc;
+                margin:10px;
+            }
 
-            
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
         </style>
     </head>
     <body>
@@ -78,16 +88,17 @@
                     <textarea runat="server" id="input"  wrap="hard" placeholder="Introduce el texto a justificar."></textarea>
                 
                     <textarea runat="server" id="resultado" wrap="hard" placeholder="Resultado."></textarea>
-                    <!-- <p id="texto" runat="server">Resultado</p></div><br>-->
+                    </div>
     		        <br />
-                    <label for="cols">Introduzca el número de columnas</label>
-                    <input type="number" name="cols"/>
+                    <label for="cols">Introduzca el número de columnas</label><br />
+                    <input type="number" class="inputtext" placeholder="5" name="cols"/><br />
+
                 <input runat="server" id="button1" type="submit" value="Justificar ✓"/>
             </form>
            
     	    <footer>
-    		    <p>Alumno: Antonio Julián  Alférez Zamora<br>
-    			    Correo: aj.alferez@alumnos.upm.es <br>
+    		    <p>Alumno: Antonio Alférez<br>
+    			    Correo: aj.alferez@outlook.com <br>
     		    </p>
     	    </footer>
     </body>
