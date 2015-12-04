@@ -25,7 +25,7 @@
                     <textarea runat="server" id="input" rows="10" cols="10" wrap="hard" placeholder="Introduce el texto a justificar."></textarea>
                 </div>
     		    <br/>
-                <input runat="server" id="button1" type="submit" value="Submit" OnServerClick="justifica"/>
+                <input runat="server" id="button1" type="submit" value="Submit"/>
             </form>
             <p id="texto" runat="server">Resultado</p>
     	    <footer>
