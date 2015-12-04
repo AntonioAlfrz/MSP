@@ -16,10 +16,10 @@
             <textarea runat="server" id="resultado" wrap="hard" placeholder="Resultado."></textarea>
         </div>
         <br />
-        <label for="cols">Introduzca el número de caracteres </label><br />
-        <input type="number" class="inputtext" placeholder="10" name="cols" /><br />
-
-        <input runat="server" id="button1" type="submit" value="Justificar ✓" />
+        <label for="cols">Introduzca el número de caracteres </label>
+        <br />
+        <input runat="server" type="number" id="cols" class="inputtext" placeholder="10" name="cols" /><br />
+        <input runat="server" type="submit" id="button1" value="Justificar ✓" onserverclick="Justify_Text" />
     </form>
     <footer>
         <p>

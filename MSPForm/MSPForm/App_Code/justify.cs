@@ -7,11 +7,11 @@ namespace MSPForm
 {
     class Justify
     {
-        private readonly char[] vocal={ 'a','e','i','o','u','á','é','í','ó','ú', 'ü'};
-        private readonly char[] tilde = {'í','ú' };
+        private readonly char[] vocal = { 'a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'ü' };
+        private readonly char[] tilde = { 'í', 'ú' };
         private readonly char[] fuerte = { 'a', 'e', 'o' };
-        private readonly string[] exceptions={"bl","cl","fl","gl","ll","pl","tl","br","cr","dr","fr","gr","pr","tr","ch","rr"};
-        private readonly string[] dipt={ "ia","ie","io","ua","ue","uo","ai","au","ei","eu","oi","iu","ui"};
+        private readonly string[] exceptions = { "bl", "cl", "fl", "gl", "ll", "pl", "tl", "br", "cr", "dr", "fr", "gr", "pr", "tr", "ch", "rr" };
+        private readonly string[] dipt = { "ia", "ie", "io", "ua", "ue", "uo", "ai", "au", "ei", "eu", "oi", "iu", "ui" };
 
         private bool isvocal(char c)
         {
@@ -22,7 +22,7 @@ namespace MSPForm
         {
             string pattern = "á";
             Regex rgx = new Regex(pattern);
-            s= rgx.Replace(s, "a");
+            s = rgx.Replace(s, "a");
             pattern = "é";
             rgx = new Regex(pattern);
             s = rgx.Replace(s, "e");
@@ -37,16 +37,18 @@ namespace MSPForm
             return rgx.Replace(s, "u");
         }
         // Separa una palabra en sílabas, Distingue cualquier caso en español (diptongos, triptongos, hiatos)
-        private List <string> separa(string word)
+        private List<string> separa(string word)
         {
             string buffer = "";
             List<string> ret = new List<string>();
-            for(int i = 0; i < word.Length; i++)
+            for (int i = 0; i < word.Length; i++)
             {
                 if (!isvocal(word[i]))
                 {
-                    if (i < word.Length - 1) { 
-                        if (isvocal(word[i + 1])){
+                    if (i < word.Length - 1)
+                    {
+                        if (isvocal(word[i + 1]))
+                        {
                             if (buffer.Length != 0)
                             {
                                 ret.Add(buffer);
@@ -61,12 +63,12 @@ namespace MSPForm
                                 if (buffer.Length != 0)
                                 {
                                     ret.Add(buffer);
-                                }                              
+                                }
                                 buffer = word[i].ToString() + word[i + 1].ToString();
                                 i++;
                                 continue;
                             }
-                            if(i<word.Length-2)
+                            if (i < word.Length - 2)
                             {
                                 //c-cv
                                 if (isvocal(word[i + 2]))
@@ -78,10 +80,10 @@ namespace MSPForm
                                 else
                                 {
                                     //c-cc
-                                    if (exceptions.Contains((word[i+1].ToString() + word[i+2].ToString())))
-                                        {                
+                                    if (exceptions.Contains((word[i + 1].ToString() + word[i + 2].ToString())))
+                                    {
                                         ret.Add(buffer + word[i]);
-                                        buffer = word[i+1].ToString()+word[i+2].ToString();
+                                        buffer = word[i + 1].ToString() + word[i + 2].ToString();
                                         i += 2;
                                         continue;
                                     }
@@ -114,7 +116,7 @@ namespace MSPForm
                     {
                         if (isvocal(word[i + 1]))
                         {
-                            if ((tilde.Contains(word[i]) && fuerte.Contains(word[i+1])) || (tilde.Contains(word[i+1]) && fuerte.Contains(word[i])))
+                            if ((tilde.Contains(word[i]) && fuerte.Contains(word[i + 1])) || (tilde.Contains(word[i + 1]) && fuerte.Contains(word[i])))
                             {
                                 ret.Add(buffer + word[i]);
                                 buffer = "";
@@ -122,7 +124,7 @@ namespace MSPForm
                             }
                             else if (dipt.Contains((QuitarSim(word[i].ToString() + word[i + 1].ToString()))))
                             {
-                                buffer += word[i].ToString()+word[i+1].ToString();
+                                buffer += word[i].ToString() + word[i + 1].ToString();
                                 i++;
                                 continue;
 
@@ -146,7 +148,7 @@ namespace MSPForm
                                 }
                                 else
                                 {
-                                    if (exceptions.Contains( (word[i + 1].ToString() + word[i + 2].ToString())))
+                                    if (exceptions.Contains((word[i + 1].ToString() + word[i + 2].ToString())))
                                     {
                                         ret.Add(buffer + word[i]);
                                         buffer = "";
@@ -240,7 +242,7 @@ namespace MSPForm
                     {
                         List<string> silabas = separa(siguiente);
                         string add_sil = (temp + " " + silabas[0]).Trim();
-                        if (add_sil.Length+1 > col)
+                        if (add_sil.Length + 1 > col)
                         {
                             ret.Add(temp);
                             temp = "";
@@ -253,10 +255,10 @@ namespace MSPForm
                             for (int i = 1; i < silabas.Count; i++)
                             {
                                 suma += silabas[i].Length;
-                                if (suma + temp.Length+1 > col)
+                                if (suma + temp.Length + 1 > col)
                                 {
-                                    ret.Add(temp+"-");
-                                    siguiente = siguiente.Substring(suma+silabas[0].Length - silabas[i].Length);
+                                    ret.Add(temp + "-");
+                                    siguiente = siguiente.Substring(suma + silabas[0].Length - silabas[i].Length);
                                     break;
                                 }
                                 temp += silabas[i];
@@ -264,7 +266,7 @@ namespace MSPForm
                             temp = "";
                             continue;
                         }
-                        
+
                     }
                 }
                 siguiente = Pop(ref words);

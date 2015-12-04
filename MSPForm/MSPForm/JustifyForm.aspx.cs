@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace MSPForm
 {
@@ -13,10 +9,15 @@ namespace MSPForm
         {
 
         }
-        protected void Justify_Text(string text)
+        protected void Justify_Text(object sender, EventArgs e)
         {
-            Justify m = new Justify();
-
+            int columnas = cols.Value=="" ? 10 : int.Parse(cols.Value);
+            List<string> temp = new Justify().justifica(input.Value, columnas);
+            resultado.Value = "";
+            foreach (string p in temp)
+            {
+                resultado.Value += p+"\n";
+            }
         }
     }
 }
