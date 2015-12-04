@@ -1,2 +1,73 @@
-﻿body {
+﻿* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+textarea {
+    overflow: auto;
+    resize: none;
+    border: 0;
+    background-color: #cccccc;
+    padding: 20px;
+    width: 30%;
+    max-width: 600px;
+    height: 200px;
+    margin: 20px;
+}
+
+::-moz-selection {
+    background-color: #444444;
+    color: white;
+}
+
+textarea:focus {
+    outline-color: #353535;
+    outline-style: solid;
+    outline-width: 1px;
+}
+
+div {
+    text-align: center;
+}
+
+#form1 {
+    text-align: center;
+}
+
+#button1 {
+    color: white;
+    background-color: #444444;
+    outline: none;
+    border: 0;
+    border-radius: 20px;
+    padding: 10px;
+    display: inline-block;
+}
+
+#galeria {
+    display: inline-block;
+    width: 100%;
+}
+
+#texto {
+    display: inline-block;
+}
+
+footer {
+    font-variant: small-caps;
+}
+
+.inputtext {
+    outline: none;
+    padding: 3px;
+    border: 0;
+    background-color: #cccccc;
+    margin: 10px;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
