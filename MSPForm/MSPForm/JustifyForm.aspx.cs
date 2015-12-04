@@ -13,5 +13,9 @@ namespace MSPForm
         {
 
         }
+        protected void Justify_Text(string text)
+        {
+            Justify m = new Justify();
+        }
     }
 }
