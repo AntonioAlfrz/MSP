@@ -16,15 +16,25 @@
     		    textarea{
     			    overflow: auto;
                      resize:none;
-                     outline:none;
+                   
                      border: 0;
                      background-color: #cccccc;
                      padding:20px;
                                width:30%;
                 max-width:600px;
-                height:40%;
-                max-height: 500px;
+                height:200px;
+                
+                margin:20px;
     		    }
+             ::-moz-selection  {
+                background-color: #444444;
+                color:white;
+            }
+                textarea:focus{
+                      outline-color: #353535;
+                     outline-style: solid;
+                     outline-width: 1px;
+                }
                 div{
                     text-align: center;
                 }
@@ -39,8 +49,8 @@
                 background-color:#444444;
                 outline:none;
                 border:0;
-                border-radius:16px;
-                padding:5px;
+                border-radius:20px;
+                padding:10px;
                 display:inline-block;
       
             }
@@ -51,6 +61,10 @@
             }
             #texto {
                 display: inline-block;
+            }
+
+            footer {
+                font-variant:small-caps;
             }
 
             
@@ -66,14 +80,14 @@
                     <textarea runat="server" id="resultado" wrap="hard" placeholder="Resultado."></textarea>
                     <!-- <p id="texto" runat="server">Resultado</p></div><br>-->
     		        <br />
-                
-                <input runat="server" id="button1" type="submit" value="Submit"/>
+                    <label for="cols">Introduzca el número de columnas</label>
+                    <input type="number" name="cols"/>
+                <input runat="server" id="button1" type="submit" value="Justificar ✓"/>
             </form>
            
     	    <footer>
     		    <p>Alumno: Antonio Julián  Alférez Zamora<br>
     			    Correo: aj.alferez@alumnos.upm.es <br>
-    			    Fecha: <script type="text/javascript"> document.write(new Date()); </script>
     		    </p>
     	    </footer>
     </body>
