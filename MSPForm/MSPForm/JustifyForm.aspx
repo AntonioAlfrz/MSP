@@ -20,7 +20,11 @@
         <br />
         <input runat="server" type="number" id="cols" class="inputtext" placeholder="10" name="cols" /><br />
         <input runat="server" type="submit" id="button1" value="Justificar ✓" onserverclick="Justify_Text" />
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+            <Scripts></Scripts>
+        </asp:ScriptManager>
     </form>
+
     <footer>
         <p>
             Alumno: Antonio Alférez

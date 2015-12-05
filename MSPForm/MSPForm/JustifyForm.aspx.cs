@@ -13,6 +13,12 @@ namespace MSPForm
         {
             int columnas = cols.Value=="" ? 10 : int.Parse(cols.Value);
             List<string> temp = new Justify().justifica(input.Value, columnas);
+            if (temp == null)
+            {
+                string alert = "El número de caracteres nos es suficiente para el texto introducido, rompería sílabas.";
+                System.Web.UI.ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertScript", "alert('"+alert+"');", true);
+                return;
+            }
             resultado.Value = "";
             foreach (string p in temp)
             {

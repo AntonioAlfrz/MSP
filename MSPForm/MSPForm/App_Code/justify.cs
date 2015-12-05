@@ -241,12 +241,10 @@ namespace MSPForm
                     else
                     {
                         List<string> silabas = separa(siguiente);
-                        if (silabas[0].Length > col)
+                        if (silabas[0].Length +1 > col)
                         {
-                            // Truncar sílaba
-                            ret.Add(silabas[0].Remove(col));
-                            siguiente = siguiente.Substring(col);
-                            continue;
+                            // No cabe nada, rompería sílaba
+                            return null;
                         }
                         string add_sil = (temp + " " + silabas[0]).Trim();
                         if (add_sil.Length + 1 > col)
