@@ -12,10 +12,10 @@ namespace MSPForm
         protected void Justify_Text(object sender, EventArgs e)
         {
             int columnas = cols.Value=="" ? 10 : int.Parse(cols.Value);
-            List<string> temp = new Justify().justifica(input.Value, columnas);
+            List<string> temp = new Justify().Justifica(input.Value, columnas);
             if (temp == null)
             {
-                string alert = "El número de caracteres nos es suficiente para el texto introducido, rompería sílabas.";
+                string alert = "El número de caracteres nos es suficiente para el texto introducido, rompería sílabas.Si introduce números, éstos no se separan.";
                 System.Web.UI.ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertScript", "alert('"+alert+"');", true);
                 return;
             }

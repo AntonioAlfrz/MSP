@@ -13,9 +13,15 @@ namespace MSPForm
         private readonly string[] exceptions = { "bl", "cl", "fl", "gl", "ll", "pl", "tl", "br", "cr", "dr", "fr", "gr", "pr", "tr", "ch", "rr" };
         private readonly string[] dipt = { "ia", "ie", "io", "ua", "ue", "uo", "ai", "au", "ei", "eu", "oi", "iu", "ui" };
 
-        private bool isvocal(char c)
+        private bool IsVocal(char c)
         {
             return vocal.Contains(Char.ToLower(c));
+        }
+        // Comprueba si es la palabra es un número
+        private bool IsNumber(string word)
+        {
+            Regex rgx = new Regex(@"^\d+$");
+            return rgx.IsMatch(word);
         }
         // Quita acentos y diéresis
         private string QuitarSim(string s)
@@ -37,17 +43,17 @@ namespace MSPForm
             return rgx.Replace(s, "u");
         }
         // Separa una palabra en sílabas, Distingue cualquier caso en español (diptongos, triptongos, hiatos)
-        private List<string> separa(string word)
+        private List<string> Separa(string word)
         {
             string buffer = "";
             List<string> ret = new List<string>();
             for (int i = 0; i < word.Length; i++)
             {
-                if (!isvocal(word[i]))
+                if (!IsVocal(word[i]))
                 {
                     if (i < word.Length - 1)
                     {
-                        if (isvocal(word[i + 1]))
+                        if (IsVocal(word[i + 1]))
                         {
                             if (buffer.Length != 0)
                             {
@@ -71,7 +77,7 @@ namespace MSPForm
                             if (i < word.Length - 2)
                             {
                                 //c-cv
-                                if (isvocal(word[i + 2]))
+                                if (IsVocal(word[i + 2]))
                                 {
                                     ret.Add(buffer + word[i]);
                                     buffer = "";
@@ -114,7 +120,7 @@ namespace MSPForm
                 {
                     if (i < word.Length - 1)
                     {
-                        if (isvocal(word[i + 1]))
+                        if (IsVocal(word[i + 1]))
                         {
                             if ((tilde.Contains(word[i]) && fuerte.Contains(word[i + 1])) || (tilde.Contains(word[i + 1]) && fuerte.Contains(word[i])))
                             {
@@ -140,7 +146,7 @@ namespace MSPForm
                         {
                             if (i < word.Length - 2)
                             {
-                                if (isvocal(word[i + 2]))
+                                if (IsVocal(word[i + 2]))
                                 {
                                     ret.Add(buffer + word[i]);
                                     buffer = "";
@@ -196,7 +202,7 @@ namespace MSPForm
             return word;
         }
         // Justifica un texto
-        public List<string> justifica(string text, int col)
+        public List<string> Justifica(string text, int col)
         {
             List<string> ret = new List<string>();
             text = text.Trim();
@@ -223,7 +229,7 @@ namespace MSPForm
                     temp = "";
                 }
                 // No cabe la siguiente palabra
-                // Se ha decidido no separar las palabras si caben en la siguiente fila
+                // Se ha decidido no Separar las palabras si caben en la siguiente fila
                 else
                 {
                     if (siguiente.Length < col)
@@ -240,9 +246,14 @@ namespace MSPForm
                     // Separa sílabas. Se ha decidido que el guión cuente como carácter
                     else
                     {
-                        List<string> silabas = separa(siguiente);
+                        List<string> silabas = Separa(siguiente);
                         if (silabas[0].Length +1 > col)
                         {
+                            if (IsNumber(silabas[0])){
+                                ret.Add(silabas[0].Remove(col));
+                                siguiente = siguiente.Substring(col);
+                                continue;
+                            }
                             // No cabe nada, rompería sílaba
                             return null;
                         }
