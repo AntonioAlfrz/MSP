@@ -241,6 +241,13 @@ namespace MSPForm
                     else
                     {
                         List<string> silabas = separa(siguiente);
+                        if (silabas[0].Length > col)
+                        {
+                            // Truncar sílaba
+                            ret.Add(silabas[0].Remove(col));
+                            siguiente = siguiente.Substring(col);
+                            continue;
+                        }
                         string add_sil = (temp + " " + silabas[0]).Trim();
                         if (add_sil.Length + 1 > col)
                         {
@@ -271,7 +278,10 @@ namespace MSPForm
                 }
                 siguiente = Pop(ref words);
             }
-            ret.Add(temp.Trim());
+            if (temp.Length != 0)
+            {
+                ret.Add(temp.Trim());
+            }
             return ret;
         }
     }
