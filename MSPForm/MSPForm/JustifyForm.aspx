@@ -10,7 +10,7 @@
 <body>
     <h1>Justifica un texto </h1>
     <form id="form1" runat="server">
-        <p>Escriba un texto e indique el máximo número de caracteres por fila (distingue diptongos, triptongos, hiatos, ...) </p>
+        <p>Escriba un texto e indique el máximo número de caracteres por fila. Distingue diptongos, triptongos, hiatos y excepciones. </p>
         <div id="galeria">
             <textarea runat="server" id="input" wrap="hard" placeholder="Introduce el texto a justificar."></textarea>
             <textarea runat="server" id="resultado" wrap="hard" placeholder="Resultado."></textarea>

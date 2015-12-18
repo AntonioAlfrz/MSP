@@ -15,7 +15,7 @@ namespace MSPForm
             List<string> temp = new Justify().Justifica(input.Value, columnas);
             if (temp == null)
             {
-                string alert = "El número de caracteres nos es suficiente para el texto introducido, rompería sílabas.Si introduce números, éstos no se separan.";
+                string alert = "El número de caracteres nos es suficiente para el texto introducido, rompería sílabas.";
                 System.Web.UI.ScriptManager.RegisterClientScriptBlock(this, GetType(), "alertScript", "alert('"+alert+"');", true);
                 return;
             }

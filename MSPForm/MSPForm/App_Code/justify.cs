@@ -250,8 +250,19 @@ namespace MSPForm
                         if (silabas[0].Length +1 > col)
                         {
                             if (IsNumber(silabas[0])){
-                                ret.Add(silabas[0].Remove(col));
-                                siguiente = siguiente.Substring(col);
+                                if (temp != "")
+                                {
+                                    temp = temp.Trim();
+                                    ret.Add(temp+" "+silabas[0].Remove(col-temp.Length-1));
+                                    siguiente = siguiente.Substring(col-temp.Length - 1);
+                                    temp = "";
+                                }
+                                else
+                                {
+                                    ret.Add(silabas[0].Remove(col));
+                                    siguiente = siguiente.Substring(col);
+                                }
+                                
                                 continue;
                             }
                             // No cabe nada, rompería sílaba
